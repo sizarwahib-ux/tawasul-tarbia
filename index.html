@@ -1,21 +1,204 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>منصة انشغالات قطاع التربية لولاية تيارت</title>
-    <meta name="description" content="المنصة الرقمية الرسمية لاستقبال ومتابعة انشغالات الأسرة التربوية والمواطنين بمديرية التربية لولاية تيارت" />
-    <meta property="og:title" content="منصة انشغالات قطاع التربية لولاية تيارت" />
-    <meta property="og:description" content="المنصة الرقمية الرسمية لاستقبال ومتابعة انشغالات الأسرة التربوية والمواطنين بمديرية التربية لولاية تيارت" />
-    <meta property="og:type" content="website" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
-  </head>
-  <body class="bg-slate-50 text-slate-900 font-sans antialiased selection:bg-emerald-600 selection:text-white min-h-screen">
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
-</html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>منصة انشغالات قطاع التربية – ولاية تيارت</title>
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);--bg:#f4f6f3;--card:#fff;--tx:#1d2b25;--mu:#5f6f68;--pr:#0f6b4f;--pr2:#e3f1ea;--bd:#d9e0dc;--wr:#b45309;--er:#b42318}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#121a17;--card:#1b2622;--tx:#e8efeb;--mu:#98a9a1;--pr:#3fbf8f;--pr2:#213a30;--bd:#2d3b35}}
+:root[data-theme="dark"]{--bg:#121a17;--card:#1b2622;--tx:#e8efeb;--mu:#98a9a1;--pr:#3fbf8f;--pr2:#213a30;--bd:#2d3b35}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.7 "Segoe UI",Tahoma,"Noto Naskh Arabic",Arial,sans-serif}
+header{background:var(--pr);color:#fff;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+header h1{font-size:17px;margin:0}header small{opacity:.85;display:block;font-size:12px}
+main{max-width:920px;margin:0 auto;padding:14px}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:16px;margin-bottom:14px}
+h2{font-size:18px;margin:0 0 10px}
+label{display:block;font-size:14px;color:var(--mu);margin:10px 0 3px}
+input,select,textarea{width:100%;padding:10px;border:1px solid var(--bd);border-radius:8px;background:var(--bg);color:var(--tx);font:inherit}
+textarea{min-height:100px}
+button{font:inherit;cursor:pointer;border:0;border-radius:8px;padding:9px 16px;background:var(--pr);color:#fff}
+button.s{background:var(--pr2);color:var(--pr)}button.d{background:var(--er)}
+header button{background:rgba(255,255,255,.18)}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:12px}
+.tabs{display:flex;gap:6px;margin-bottom:12px;flex-wrap:wrap}.tabs button{background:var(--card);color:var(--tx);border:1px solid var(--bd)}.tabs button.on{background:var(--pr);color:#fff}
+.it{border:1px solid var(--bd);border-radius:10px;padding:10px 12px;margin-top:8px}
+.it b{display:block}.mu{color:var(--mu);font-size:13px}
+.tag{display:inline-block;padding:1px 9px;border-radius:99px;font-size:12px;background:var(--pr2);color:var(--pr);margin-inline-end:4px}
+.tag.w{background:#fdecc8;color:var(--wr)}.tag.e{background:#fde0dd;color:var(--er)}
+.err{color:var(--er);font-size:14px;margin-top:8px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}@media(max-width:560px){.grid{grid-template-columns:1fr}}
+.rc{border:2px dashed var(--pr);border-radius:12px;padding:16px;background:var(--pr2)}
+.rc h3{margin:0 0 8px;color:var(--pr)}
+@media print{body>*:not(#rcw){display:none!important}#rcw{display:block!important;position:static!important}.noprint{display:none}}
+#rcw{display:none}
+</style>
+</head>
+<body>
+<header>
+  <div><h1>منصة انشغالات قطاع التربية – ولاية تيارت</h1><small>فضاء المواطنين وموظفي القطاع للتواصل مع مديرية التربية</small></div>
+  <div id="hb"></div>
+</header>
+<main id="app"></main>
+<div id="rcw"><main><div class="rc" id="rc"></div><div class="row noprint"><button onclick="window.print()">🖨️ طباعة الوصل</button><button class="s" onclick="closeRc()">إغلاق</button></div></main></div>
 
+<script>
+
+// ---------- التخزين (محلي في المتصفح – نسخة تجريبية) ----------
+var users=[],concerns=[],books=[],uid=null;
+function tues(){var a=[],d=new Date();d.setHours(12,0,0,0);while(a.length<8){if(d.getDay()==2)a.push([d.toISOString().slice(0,10),d.toLocaleDateString('ar-DZ',{weekday:'long',day:'numeric',month:'long',year:'numeric'})]);d.setDate(d.getDate()+1)}return a}
+var SLOTS=['09:00','09:30','10:00','10:30','11:00','11:30','14:00','14:30','15:00'];
+var CATS=[
+ ['👥','الموارد البشرية والمسار المهني','ترقية|رتبة|تثبيت|مسار|ملف|توظيف|عقد|إدماج|تقاعد|عطلة|نقل|تحويل|حركة'],
+ ['💰','الأجور والمنح','راتب|أجر|منحة|مستحقات|علاوة|تعويض|فارق|شهرية'],
+ ['🚌','النقل المدرسي','نقل|حافلة|مسافة|بعد'],
+ ['🍽️','المطاعم المدرسية','مطعم|إطعام|وجبة|أكل|طعام'],
+ ['🏫','الهياكل والصيانة','مدرسة|قسم|تدفئة|تسرب|صيانة|بناء|مبنى|اكتظاظ|مقاعد|ماء|كهرباء|ثانوية|متوسطة|ابتدائية'],
+ ['📝','التسجيل والتوجيه والامتحانات','تسجيل|توجيه|امتحان|نتائج|شهادة|إعادة|طعن|تمدرس|سجل'],
+ ['📂','أخرى','']];
+var amsg='',delId='',tmpMsg='';
+function rnd(n){return Math.random().toString(36).slice(2,2+n).toUpperCase()}
+
+var me=null,adm=false,tab='new',atab='c',msg='',last=null;
+function $(i){return document.getElementById(i)}
+function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
+function today(){return new Date().toISOString().slice(0,10)}
+function fmt(d){try{return new Date(d).toLocaleString('ar-DZ',{dateStyle:'medium',timeStyle:'short'})}catch(e){return d}}
+function catOf(t){var i;for(i=0;i<CATS.length-1;i++)if(new RegExp(CATS[i][2]).test(t))return i;return CATS.length-1}
+
+// ---------- الهيكل العام ----------
+function head(){
+  var h='';
+  if(me)h+='<span>'+esc(me.name)+'</span> ';
+  if(adm)h+='<span>🛡️ الإدارة</span> ';
+  if(me||adm)h+='<button onclick="refresh()">🔄</button> <button onclick="logout()">خروج</button>';
+  $('hb').innerHTML=h;
+}
+function render(){head();
+  if(adm)return renderAdmin();
+  if(me)return renderUser();
+  renderAuth();
+}
+
+// ---------- الدخول ----------
+var mode='in';
+function renderAuth(){if(mode=='fg')return renderFg();if(mode=='fa')return renderFa();
+  $('app').innerHTML='<div class="card"><div class="tabs"><button class="'+(mode=='in'?'on':'')+'" onclick="mode=\'in\';render()">تسجيل الدخول</button><button class="'+(mode=='up'?'on':'')+'" onclick="mode=\'up\';render()">حساب جديد</button><button class="'+(mode=='ad'?'on':'')+'" onclick="mode=\'ad\';render()">🛡️ دخول الإدارة</button></div>'+
+  (mode=='up'?'<label>الاسم واللقب</label><input id="nm"><label>الصفة</label><select id="rl"><option>مواطن</option><option>موظف بقطاع التربية</option></select>':'')+
+  (mode=='ad'?'<label>اسم المستخدم</label><input id="ph" autocomplete="username">':'<label>رقم الهاتف</label><input id="ph" type="tel" inputmode="numeric">')+
+  '<label>كلمة السر</label><input id="pw" type="password">'+
+  '<div class="err" id="er">'+esc(msg)+'</div><div class="row"><button onclick="auth()">'+(mode=='in'?'دخول':mode=='up'?'إنشاء الحساب':'دخول الإدارة')+'</button></div>'+
+  (mode=='up'?'':'<p><a href="#" onclick="mode=\''+(mode=='ad'?'fa':'fg')+'\';msg=\'\';render();return false">'+(mode=='ad'?'نسيت اسم المستخدم أو كلمة السر؟':'نسيت كلمة السر؟')+'</a></p>')+(mode=='ad'?'<p class="mu">حساب الإدارة يُنشأ بتشغيل الدالة setup في Google Apps Script (انظر Code.gs).</p>':'')+'</div>';
+}
+function back(){mode='in';msg='';render()}
+// ---------- فضاء المستخدم ----------
+function renderUser(){
+  var t=[['new','✍️ انشغال جديد'],['bk','📅 حجز موعد'],['my','📋 طلباتي'],['pw','🔑 كلمة السر']];
+  var h='<div class="tabs">'+t.map(function(x){return '<button class="'+(tab==x[0]?'on':'')+'" onclick="tab=\''+x[0]+'\';msg=\'\';amsg=\'\';render()">'+x[1]+'</button>'}).join('')+'</div>';
+  if(tab=='new')h+='<div class="card"><h2>تسجيل انشغال</h2><label>عنوان الانشغال</label><input id="ti" maxlength="120"><label>وصف الانشغال</label><textarea id="bd"></textarea><div class="err">'+esc(msg)+'</div><div class="row"><button onclick="addC()">إرسال وإصدار الوصل</button></div></div>';
+  if(tab=='bk'){
+    var mine=concerns.filter(function(c){return c.ph==me.ph});
+    h+='<div class="card"><h2>حجز موعد للقاء</h2><label>الجهة المراد لقاؤها</label><select id="of">'+OFFICIALS.map(function(o,i){return '<option value="'+i+'">'+esc(o.n)+'</option>'}).join('')+'</select>'+
+    '<div class="grid"><div><label>يوم الاستقبال: الثلاثاء</label><select id="dt">'+tues().map(function(t){return '<option value="'+t[0]+'">'+t[1]+'</option>'}).join('')+'</select></div><div><label>الساعة</label><select id="tm">'+SLOTS.map(function(s){return '<option>'+s+'</option>'}).join('')+'</select></div></div>'+
+    '<label>سبب اللقاء بالتفصيل</label><textarea id="rs" placeholder="اشرح موضوع اللقاء وما تطلبه من المسؤول"></textarea><label>الانشغال المرتبط (اختياري)</label><select id="cc"><option value="">—</option>'+mine.map(function(c){return '<option value="'+c.id+'">'+esc(c.id+' – '+c.title)+'</option>'}).join('')+'</select>'+
+    '<div class="err">'+esc(msg)+'</div><div class="row"><button onclick="addB()">تأكيد الحجز</button></div><p class="mu">يوم الاستقبال هو الثلاثاء فقط. يؤكد الحجز من طرف الإدارة.</p></div>';}
+  if(tab=='my'){
+    var c=concerns.filter(function(x){return x.ph==me.ph}),b=books.filter(function(x){return x.ph==me.ph});
+    h+='<div class="card"><h2>انشغالاتي</h2>'+(c.length?c.map(function(x){return '<div class="it"><b>'+esc(x.title)+'</b><span class="tag">'+esc(x.id)+'</span><span class="tag w">'+esc(x.status)+'</span><div class="mu">'+fmt(x.date)+'</div>'+(x.reply?'<div class="it" style="background:var(--pr2)"><b>🏛️ رد الإدارة</b><div>'+esc(x.reply.text)+'</div><div class="mu">'+fmt(x.reply.date)+'</div></div>':'')+'<div class="row"><button class="s" onclick="showRc(\''+x.id+'\')">عرض الوصل</button>'+(x.status=='مسجل'?'<button class="d" onclick="delC(\''+x.id+'\')">🗑️ '+(delId==x.id?'تأكيد الحذف':'حذف')+'</button>':'')+'</div></div>'}).join(''):'<p class="mu">لا توجد انشغالات بعد.</p>')+'</div>'+
+    '<div class="card"><h2>مواعيدي</h2>'+(b.length?b.map(function(x){return '<div class="it"><b>'+esc(x.off)+'</b> – '+esc(x.day)+' '+esc(x.tm)+' <span class="tag '+(x.status=='مؤكد'?'':'w')+'">'+esc(x.status)+'</span><div class="mu">'+esc(x.place||'العنوان يحدد عند التأكيد')+'</div></div>'}).join(''):'<p class="mu">لا توجد مواعيد.</p>')+'</div>';}
+  if(tab=='pw')h+='<div class="card"><h2>تغيير كلمة السر</h2>'+pwForm()+'</div>';
+  $('app').innerHTML=h;
+}
+function showRc(id){
+  var c=concerns.filter(function(x){return x.id==id})[0],b=books.filter(function(x){return x.id==id})[0],r=c||b;if(!r)return;
+  $('rc').innerHTML='<h3>'+(c?'وصل تسجيل انشغال':'وصل حجز موعد')+'</h3><p><b>رقم الوصل:</b> '+esc(r.id)+'</p><p><b>الاسم:</b> '+esc(r.name)+' ('+esc(r.ph)+')</p>'+
+   (c?'<p><b>العنوان:</b> '+esc(c.title)+'</p><p><b>التاريخ:</b> '+fmt(c.date)+'</p>':'<p><b>الجهة:</b> '+esc(b.off)+'</p><p><b>الموعد:</b> '+esc(b.day)+' – '+esc(b.tm)+'</p><p><b>الحالة:</b> '+esc(b.status)+'</p>')+
+   '<p class="mu">مديرية التربية لولاية تيارت – يحتفظ بهذا الوصل لمتابعة الملف.</p>';
+  $('rcw').style.display='block';$('rcw').style.position='fixed';$('rcw').style.inset='0';$('rcw').style.background='var(--bg)';$('rcw').style.overflow='auto';
+}
+function closeRc(){$('rcw').style.display='none'}
+
+// ---------- فضاء الإدارة ----------
+function renderAdmin(){if(atab!='s')amsg='';if(atab!='u')tmpMsg='';
+  var t=[['c','📨 الانشغالات'],['b','📅 الحجوزات'],['o','📍 العناوين'],['u','👥 المستخدمون'],['s','⚙️ الحساب']];
+  var h='<div class="tabs">'+t.map(function(x){return '<button class="'+(atab==x[0]?'on':'')+'" onclick="atab=\''+x[0]+'\';render()">'+x[1]+'</button>'}).join('')+'</div>';
+  if(atab=='c'){
+    h+='<div class="card"><div class="row" style="margin:0"><h2 style="margin:0;flex:1">الانشغالات ('+concerns.length+')</h2><button onclick="classify()" title="تصنيف وترتيب وكشف المتشابه">🏷️ تصنيف وترتيب</button><button class="s" onclick="exportC()">⬇️ CSV</button></div>'+(last?'<p class="mu">'+esc(last)+'</p>':'');
+    var l=concerns.slice().sort(function(a,b){return (b.gsize||0)-(a.gsize||0)||(a.grp||'').localeCompare(b.grp||'')||b.date.localeCompare(a.date)});
+    h+=l.length?l.map(function(c){
+      return '<div class="it"><b>'+esc(c.title)+'</b><span class="tag">'+CATS[c.cat][0]+' '+esc(CATS[c.cat][1])+'</span>'+(c.gsize>1?'<span class="tag e">🔁 متشابه/مكرر ×'+c.gsize+' ('+esc(c.grp)+')</span>':'')+
+      '<div class="mu">'+esc(c.id)+' • '+esc(c.name)+' ('+esc(c.role)+') • 📞 '+esc(c.ph)+' • '+fmt(c.date)+'</div><div>'+esc(c.body)+'</div>'+
+      '<div style="margin-top:8px"><label>رد الإدارة على الانشغال</label><textarea id="rp-'+c.id+'" style="min-height:70px" placeholder="اكتب رد الإدارة هنا">'+esc(c.reply?c.reply.text:'')+'</textarea><div class="row" style="margin-top:6px"><button onclick="sendRp(\''+c.id+'\')">💬 '+(c.reply?'تعديل الرد':'إرسال الرد')+'</button>'+(c.reply?'<span class="mu">آخر رد: '+fmt(c.reply.date)+'</span>':'')+'</div></div>'+
+      '<div class="row"><select onchange="setCat(\''+c.id+'\',this.value)">'+CATS.map(function(k,i){return '<option value="'+i+'"'+(i==c.cat?' selected':'')+'>'+k[0]+' '+k[1]+'</option>'}).join('')+'</select>'+
+      '<select onchange="setSt(\''+c.id+'\',this.value)">'+['مسجل','قيد المعالجة','تم الرد','تمت المعالجة'].map(function(s){return '<option'+(s==c.status?' selected':'')+'>'+s+'</option>'}).join('')+'</select><button class="d" onclick="delC(\''+c.id+'\')">🗑️ '+(delId==c.id?'تأكيد الحذف':'حذف')+'</button></div></div>'}).join(''):'<p class="mu">لا توجد انشغالات.</p>';
+    h+='</div>';}
+  if(atab=='b'){
+    h+='<div class="card"><div class="row" style="margin:0 0 6px"><h2 style="margin:0;flex:1">الحجوزات ('+books.length+')</h2><button class="s" onclick="exportB()">⬇️ CSV</button></div>';
+    var l2=books.slice().sort(function(a,b){return (a.day+a.tm).localeCompare(b.day+b.tm)});
+    h+=l2.length?l2.map(function(b){return '<div class="it"><b>'+esc(b.off)+'</b> – '+esc(b.day)+' '+esc(b.tm)+' <span class="tag '+(b.status=='مؤكد'?'':'w')+'">'+esc(b.status)+'</span><div class="mu">'+esc(b.id)+' • '+esc(b.name)+'</div><div>📞 <b>الهاتف:</b> <a href="tel:'+esc(b.ph)+'">'+esc(b.ph)+'</a></div><div style="margin-top:6px"><b>سبب اللقاء:</b> '+esc(b.reason||'غير مذكور')+'</div>'+cinfo(b.cid)+
+      '<div class="row"><button onclick="setB(\''+b.id+'\',\'مؤكد\')">تأكيد</button><button class="d" onclick="setB(\''+b.id+'\',\'مرفوض\')">رفض</button></div></div>'}).join(''):'<p class="mu">لا توجد حجوزات.</p>';
+    h+='</div>';}
+  if(atab=='o'){
+    h+='<div class="card"><h2>عناوين اللقاء لكل مسؤول</h2>'+OFFICIALS.map(function(o,i){return '<label>'+esc(o.n)+'</label><input value="'+esc(o.p)+'" onchange="setO('+i+',this.value)">'}).join('')+'<p class="mu">يظهر العنوان للمعنيين عند تأكيد الموعد.</p></div>';}
+  if(atab=='u')h+='<div class="card"><h2>المستخدمون ('+users.length+')</h2>'+(tmpMsg?'<p class="tag w">'+esc(tmpMsg)+'</p>':'')+(users.length?users.map(function(u){return '<div class="it"><b>'+esc(u.name)+'</b> <span class="tag">'+esc(u.role)+'</span><div>📞 '+esc(u.ph)+'</div><div class="row"><button class="s" onclick="resetPw(\''+esc(u.ph)+'\')">إعادة تعيين كلمة السر</button></div></div>'}).join(''):'<p class="mu">لا يوجد مستخدمون.</p>')+'</div>';
+  if(atab=='s')h+='<div class="card"><h2>تغيير كلمة سر الإدارة</h2>'+pwForm()+'</div>';
+  $('app').innerHTML=h;
+}
+function cinfo(id){var c=concerns.filter(function(x){return x.id==id})[0];if(!c)return '';return '<div class="it" style="background:var(--pr2)"><span class="tag">'+esc(c.id)+'</span><b>'+esc(c.title)+'</b><div>'+esc(c.body)+'</div><div class="mu">'+CATS[c.cat][0]+' '+esc(CATS[c.cat][1])+' • '+esc(c.status)+'</div></div>'}
+// ---------- التصنيف وكشف المتشابه ----------
+function toks(s){var stop={'في':1,'من':1,'على':1,'عن':1,'إلى':1,'الى':1,'هذا':1,'هذه':1,'التي':1,'الذي':1,'مع':1,'أن':1,'لا':1,'ما':1};
+  return s.replace(/[\u064B-\u0652ـ]/g,'').replace(/[إأآ]/g,'ا').replace(/ة/g,'ه').replace(/ى/g,'ي').replace(/[^\u0600-\u06FFa-z0-9\s]/gi,' ').split(/\s+/).map(function(w){return w.replace(/^(ال|وال|بال|لل)/,'')}).filter(function(w){return w.length>2&&!stop[w]})}
+function sim(a,b){var A={},B={},i=0,n=0,u;a.forEach(function(w){A[w]=1});b.forEach(function(w){B[w]=1});
+  var ka=Object.keys(A),kb=Object.keys(B);ka.forEach(function(w){if(B[w])n++});u=ka.length+kb.length-n;return u?n/u:0}
+
+var OFFICIALS=[];
+function renderFg(){$('app').innerHTML='<div class="card"><h2>استرجاع كلمة السر</h2><p>تواصل مع مديرية التربية، وستعيّن لك الإدارة كلمة سر مؤقتة من لوحتها. بعد الدخول غيّرها من تبويب «كلمة السر».</p><div class="row"><button class="s" onclick="back()">رجوع</button></div></div>'}
+function pwForm(){return '<label>كلمة السر الجديدة</label><input id="np" type="password"><label>تأكيد كلمة السر</label><input id="n2" type="password">'+(amsg=='ok'?'<p class="tag">تم تغيير كلمة السر</p>':'<div class="err">'+esc(amsg)+'</div>')+'<div class="row"><button onclick="savePw()">حفظ</button></div>'}
+function csv(name,head,rows){
+  var q=function(v){v=String(v==null?'':v);return /[",\n\r]/.test(v)?'"'+v.replace(/"/g,'""')+'"':v};
+  var t='\uFEFF'+[head].concat(rows).map(function(x){return x.map(q).join(',')}).join('\r\n');
+  var a=document.createElement('a');a.href=URL.createObjectURL(new Blob([t],{type:'text/csv;charset=utf-8'}));
+  a.download=name+'-'+today()+'.csv';document.body.appendChild(a);a.click();a.remove()}
+function ph0(v){return '="'+v+'"'}
+function exportC(){csv('concerns',['رقم الوصل','الاسم','الصفة','الهاتف','العنوان','الوصف','التصنيف','الحالة','المجموعة','رد الإدارة','التاريخ'],concerns.map(function(c){return [c.id,c.name,c.role,ph0(c.ph),c.title,c.body,CATS[c.cat][1],c.status,c.grp||'',c.reply?c.reply.text:'',c.date]}))}
+function exportB(){csv('bookings',['رقم الحجز','الاسم','الهاتف','المسؤول','اليوم','الساعة','سبب اللقاء','الانشغال المرتبط','الحالة','العنوان'],books.map(function(b){return [b.id,b.name,ph0(b.ph),b.off,b.day,b.tm,b.reason,b.cid||'',b.status,b.place||'']}))}
+
+
+
+var API='PASTE-WEB-APP-URL',tok='';
+try{tok=localStorage.getItem('tk')||''}catch(e){}
+function saveTok(t){tok=t||'';try{localStorage.setItem('tk',tok)}catch(e){}}
+async function call(a,d){d=d||{};d.action=a;d.token=tok;
+  try{var r=await fetch(API,{method:'POST',body:JSON.stringify(d)});return await r.json()}catch(e){return {error:'تعذر الاتصال بالخادم، تحقق من الشبكة'}}}
+async function load(){var r=await call('load');
+  if(r.error){if(r.auth){saveTok('');me=null;adm=false;msg=r.error;render()}else alert(r.error);return false}
+  OFFICIALS=r.officials;concerns=r.concerns;books=r.books;users=r.users||[];return true}
+async function enter(r){saveTok(r.token);adm=!!r.user.admin;me=adm?null:{id:r.user.id,ph:r.user.phone,name:r.user.name,role:r.user.role};msg='';if(await load())render()}
+async function init(){
+  if(API.indexOf('PASTE')>-1){$('app').innerHTML='<div class="card"><h2>⚙️ الموقع غير مربوط بعد</h2><p>ضع رابط Web app الخاص بـ Google Apps Script في المتغير API أعلى السكريبت.</p></div>';return}
+  if(tok){var r=await call('me');if(!r.error)return enter({token:tok,user:r.user});saveTok('')}
+  render()}
+async function refresh(){if(await load())render()}
+async function auth(){
+  var ph=$('ph').value.trim(),pw=$('pw').value,r;msg='';
+  if(!ph||!pw){msg='املأ جميع الحقول';return renderAuth()}
+  if(mode=='up'){var nm=$('nm').value.trim();
+    if(!nm||!/^\d{8,12}$/.test(ph)||pw.length<6){msg='أدخل الاسم، ورقم هاتف صحيحا (أرقام فقط)، وكلمة سر من 6 أحرف على الأقل';return renderAuth()}
+    r=await call('signup',{name:nm,phone:ph,role:$('rl').value,password:pw})}
+  else r=await call('login',{username:ph,password:pw,admin:mode=='ad'});
+  if(r.error){msg=r.error;return renderAuth()}
+  enter(r)}
+function logout(){saveTok('');me=null;adm=false;concerns=[];books=[];users=[];msg='';mode='in';render()}
+function renderFa(){$('app').innerHTML='<div class="card"><h2>استرجاع دخول الإدارة</h2><p>افتح ملف Google Sheet ← Extensions ← Apps Script، عدّل ADMIN_USER وADMIN_PASS في CONFIG، ثم شغّل الدالة <b>resetAdmin</b>.</p><div class="row"><button class="s" onclick="back()">رجوع</button></div></div>'}
+async function savePw(){var np=$('np').value,n2=$('n2').value;
+  if(np.length<6)amsg='كلمة السر 6 أحرف على الأقل';else if(np!=n2)amsg='التأكيد غير مطابق';
+  else{var r=await call('changePw',{password:np});amsg=r.error||'ok'}
+  adm?renderAdmin():renderUser()}
+async function addC(){
+  var t=$('ti').value.trim(),b=$('bd').value.trim();
+  if(t.length<4||b.length<10){msg='أدخل عنوانا ووصفا كافيا للانشغال';return renderUser()}
+  var r=await call('addConcern',{title:t,body:b,cat:catOf(t+' '+b)});
+  if(r.error){msg=r.error;return renderUser()}
+  conce
